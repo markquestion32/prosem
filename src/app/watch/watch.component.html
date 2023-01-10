@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video tahan</title>
+    <style>
+      
+      #player {
+        width: 80%; 
+        margin: 0 auto; 
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="player">
+      <video id="video" width="100%" height="auto" controls>
+        <source src="..\..\assets\vid\3_1.mp4" type="video/mp4"> 
+      </video>
+
+      
+      <div id="controls">
+        <button id="play-pause" onclick="playPause()">Play</button>
+        <input id="seek" type="range" min="0" max="100" value="0" onchange="seek()">
+        <button id="mute" onclick="mute()">Mute</button>
+        <input id="volume" type="range" min="0" max="100" value="100" onchange="changeVolume()">
+        <button id="full-screen" onclick="fullScreen()">Full Screen</button>
+        <span id="current-time">00:00</span> / <span id="duration">00:00</span>
+      </div>
+    </div>
+    
+
+    <script>
+      // Get the video element
+      var video = document.getElementById("video");
+      
+      // Get the play/pause button
+      var playPauseBtn = document.getElementById("play-pause");
+      
+      // Get the seek bar
+      var seekBar = document.getElementById("seek");
+      
+      // Get the mute button
+      var muteBtn = document.getElementById("mute");
+      
+      // Get the volume bar
+      var volumeBar = document.getElementById("volume");
+      
+      // Get the full screen button
+      var fullScreenBtn = document.getElementById("full-screen");
+      
+      // Get the current time and duration elements
+      var currentTime = document.getElementById("current-time");
+      var duration = document.getElementById("duration");
+      
+      // Add event listeners
+      video.addEventListener("play", function() {
+        playPauseBtn.innerHTML = "Pause";
+      });
+      
+      video.addEventListener("pause", function() {
+        playPauseBtn.innerHTML = "Play";
+      });
+      
+      video.addEventListener("timeupdate", function() {
+        // Update the seek bar
+        seekBar.value = (video.currentTime / video.duration) * 100;
+        
+        // Update the current time and duration
+        currentTime.innerHTML = formatTime(video.currentTime);
+        duration.innerHTML = formatTime(video.duration);
+      });
+      
+      // Play/pause function
+      function playPause() {
+        if (video.paused) {
+          video.play();
+       
+        }}
+        </script>
+
+</body>
+</html>
